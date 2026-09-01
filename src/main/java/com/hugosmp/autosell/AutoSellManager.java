@@ -62,6 +62,14 @@ public class AutoSellManager {
         return targetChestPos;
     }
 
+    public State getState() {
+        return state;
+    }
+
+    public int getRemainingCooldownTicks() {
+        return remainingCooldownTicks;
+    }
+
     public void toggle() {
         MinecraftClient mc = MinecraftClient.getInstance();
         if (mc.player == null) return;
