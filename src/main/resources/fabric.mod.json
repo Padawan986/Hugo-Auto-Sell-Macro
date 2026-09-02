@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "hugo_autosell",
-  "version": "1.0.6",
+  "version": "${version}",
   "name": "Hugo SMP Auto-Sell",
   "description": "Automatisiertes Leeren der Kiste und Verkaufen über /sell für Hugo SMP.",
   "authors": [
