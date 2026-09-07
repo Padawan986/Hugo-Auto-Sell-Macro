@@ -22,7 +22,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.zip.ZipFile;
 
-/** Downloads only an official GitHub release after the player explicitly accepts it. */
 public final class HugoAutoSellUpdater {
     private static final Logger LOGGER = LoggerFactory.getLogger(AutoSellMod.MOD_ID);
     private static final String VERSION_URL = "https://raw.githubusercontent.com/Padawan986/Hugo-Auto-Sell-Macro/refs/heads/main/version.txt";
