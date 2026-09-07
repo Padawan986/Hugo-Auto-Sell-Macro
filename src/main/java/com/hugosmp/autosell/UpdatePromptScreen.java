@@ -6,7 +6,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 
-/** Explicit in-game consent dialog for an available update. */
 public class UpdatePromptScreen extends Screen {
     private final HugoAutoSellUpdater.Update update;
 
