@@ -42,18 +42,18 @@ public class TutorialScreen extends Screen {
         int y = startY;
         MinecraftClient mc = MinecraftClient.getInstance();
 
-        // Titel
+      
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Hugo SMP Auto-Sell").copy().styled(s -> s.withColor(ACCENT).withBold(true)), centerX, y, ACCENT);
         y += lineHeight + 4;
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Erste Schritte").copy().styled(s -> s.withColor(WHITE)), centerX, y, WHITE);
         y += lineHeight + 12;
 
-        // Trennlinie
+
         int boxW = 320;
         context.fill(centerX - boxW / 2, y, centerX + boxW / 2, y + 1, ACCENT);
         y += 12;
 
-        // Schritt 1
+      
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Schritt 1: Makro starten").copy().styled(s -> s.withColor(GREEN)), centerX, y, GREEN);
         y += lineHeight;
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Schaue eine Kiste an und druecke [K]").copy().styled(s -> s.withColor(GRAY)), centerX, y, GRAY);
@@ -61,13 +61,13 @@ public class TutorialScreen extends Screen {
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Die Kiste wird als Ziel gespeichert & das Makro startet.").copy().styled(s -> s.withColor(GRAY)), centerX, y, GRAY);
         y += lineHeight + 8;
 
-        // Schritt 2
+       
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Schritt 2: Makro stoppen").copy().styled(s -> s.withColor(GREEN)), centerX, y, GREEN);
         y += lineHeight;
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Druecke einfach nochmal [K] um es zu deaktivieren.").copy().styled(s -> s.withColor(GRAY)), centerX, y, GRAY);
         y += lineHeight + 8;
 
-        // Schritt 3
+      
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Schritt 3: Befehle").copy().styled(s -> s.withColor(GREEN)), centerX, y, GREEN);
         y += lineHeight;
         String[] commands = {
@@ -82,7 +82,7 @@ public class TutorialScreen extends Screen {
         }
         y += 8;
 
-        // Schritt 4
+     
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Schritt 4: HUD Overlay").copy().styled(s -> s.withColor(GREEN)), centerX, y, GREEN);
         y += lineHeight;
         context.drawCenteredTextWithShadow(mc.textRenderer, Text.literal("Ueber der Hotbar siehst du Status & Timer.").copy().styled(s -> s.withColor(GRAY)), centerX, y, GRAY);
