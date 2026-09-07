@@ -16,8 +16,8 @@ public class HotbarOverlay {
         int screenWidth = drawContext.getScaledWindowWidth();
         int screenHeight = drawContext.getScaledWindowHeight();
 
-        // Position: Über der Hotbar (ca. 60 Pixel über dem unteren Rand)
-        int y = screenHeight - 70;
+        // Genug Abstand zur Minecraft-Actionbar lassen, damit Statusmeldungen sichtbar bleiben.
+        int y = screenHeight - 110;
         int x = screenWidth / 2;
 
         // Hintergrund-Box zeichnen

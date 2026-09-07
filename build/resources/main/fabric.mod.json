@@ -1,13 +1,17 @@
 {
   "schemaVersion": 1,
   "id": "hugo_autosell",
-  "version": "1.0.6",
+  "version": "1.1.2",
   "name": "Hugo SMP Auto-Sell",
   "description": "Automatisiertes Leeren der Kiste und Verkaufen über /sell für Hugo SMP.",
   "authors": [
     "Padawan985"
   ],
-  "contact": {},
+  "contact": {
+    "homepage": "https://github.com/Padawan986/Hugo-Auto-Sell-Macro/",
+    "issues": "https://github.com/Padawan986/Hugo-Auto-Sell-Macro/issues"
+  },
+  "icon": "assets/hugo_autosell/icon.png",
   "license": "MIT",
   "environment": "client",
   "entrypoints": {

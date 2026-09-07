@@ -7,7 +7,11 @@
   "authors": [
     "Padawan985"
   ],
-  "contact": {},
+  "contact": {
+    "homepage": "https://github.com/Padawan986/Hugo-Auto-Sell-Macro/",
+    "issues": "https://github.com/Padawan986/Hugo-Auto-Sell-Macro/issues"
+  },
+  "icon": "assets/hugo_autosell/icon.png",
   "license": "MIT",
   "environment": "client",
   "entrypoints": {

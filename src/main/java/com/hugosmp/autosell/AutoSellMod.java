@@ -18,7 +18,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 
 public class AutoSellMod implements ClientModInitializer {
     public static final String MOD_ID = "hugo_autosell";
-    public static final String MOD_VERSION = "1.0.6";
+    public static final String MOD_VERSION = "1.1.2";
 
     // Echter Minecraft-Keybinding statt raw GLFW - löst Konflikte mit anderen Mods
     private static KeyBinding toggleKey;
@@ -26,6 +26,7 @@ public class AutoSellMod implements ClientModInitializer {
     private static KeyBinding.Category keyCategory;
     private static boolean loadedMessageShown = false;
     private static boolean tutorialQueued = false;
+    private static boolean updateCheckStarted = false;
 
     @Override
     public void onInitializeClient() {
@@ -63,6 +64,13 @@ public class AutoSellMod implements ClientModInitializer {
                         MinecraftClient.getInstance().setScreen(new TutorialScreen(null));
                     }
                 }
+            }
+
+            if (!updateCheckStarted && client.player != null && client.world != null) {
+                updateCheckStarted = true;
+                HugoAutoSellUpdater.checkForUpdate(MOD_VERSION, update -> client.execute(() ->
+                        client.setScreen(new UpdatePromptScreen(update))
+                ));
             }
 
             // Keybinding abfragen (Minecraft's offizieller Weg)

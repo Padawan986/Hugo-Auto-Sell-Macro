@@ -240,10 +240,16 @@ public class AutoSellManager {
                                 if (config.orderMode && orderedItemId == null) {
                                     orderedItemId = Registries.ITEM.getId(slot.getStack().getItem()).getPath();
                                 }
-                                mc.interactionManager.clickSlot(handler.syncId, currentSlotIndex, 0, SlotActionType.QUICK_MOVE, mc.player);
+                                String itemId = Registries.ITEM.getId(slot.getStack().getItem()).getPath();
+                                // Eine Order akzeptiert nur einen Artikeltyp. Andere Items bleiben für den nächsten Durchlauf liegen.
+                                if (!config.orderMode || orderedItemId.equals(itemId)) {
+                                    mc.interactionManager.clickSlot(handler.syncId, currentSlotIndex, 0, SlotActionType.QUICK_MOVE, mc.player);
+                                    itemMoved = true;
+                                }
                                 currentSlotIndex++;
-                                itemMoved = true;
-                                break;
+                                if (itemMoved) {
+                                    break;
+                                }
                             }
                             currentSlotIndex++;
                         }
@@ -298,13 +304,15 @@ public class AutoSellManager {
                 case WAITING_FOR_ORDER_SCREEN:
                     if (mc.currentScreen instanceof HandledScreen<?> orderScreen && stateTicks >= 8) {
                         ScreenHandler orderHandler = orderScreen.getScreenHandler();
-                        // HugoSMP sortiert die Ergebnisse absteigend nach Preis: Slot 0 ist das beste Angebot.
-                        if (getTopContainerSlotCount(orderHandler) > 0 && orderHandler.getSlot(0).hasStack()) {
-                            chat(mc, "§6[HugoAutoSell] §7Wähle beste Order (erster Slot)...");
-                            mc.interactionManager.clickSlot(orderHandler.syncId, 0, 0, SlotActionType.PICKUP, mc.player);
+                        // Die Liste ist nach Preis sortiert. Wir wählen aber nur den ersten Eintrag,
+                        // dessen Artikel wirklich dem aus der Kiste gelesenen Item entspricht.
+                        int orderSlot = findMatchingOrderSlot(orderHandler);
+                        if (orderSlot >= 0) {
+                            chat(mc, "§6[HugoAutoSell] §7Wähle beste passende Order (Slot §e" + orderSlot + "§7)...");
+                            mc.interactionManager.clickSlot(orderHandler.syncId, orderSlot, 0, SlotActionType.PICKUP, mc.player);
                             state = State.WAITING_FOR_ORDER_DELIVERY_SCREEN;
                             stateTicks = 0;
-                        } else {
+                        } else if (stateTicks > 80) {
                             chat(mc, "§6[HugoAutoSell] §cKeine offene Order für " + orderedItemId + " gefunden.");
                             finishCycle();
                         }
@@ -495,6 +503,19 @@ public class AutoSellManager {
             Slot slot = handler.getSlot(i);
             if (slot != null && slot.hasStack()
                     && slot.getStack().getName().getString().toLowerCase(java.util.Locale.ROOT).contains(expected)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /** Returns the highest-priced matching order: HugoSMP presents matching offers from slot 0 onward. */
+    private int findMatchingOrderSlot(ScreenHandler handler) {
+        int topSlots = getTopContainerSlotCount(handler);
+        for (int i = 0; i < topSlots; i++) {
+            Slot slot = handler.getSlot(i);
+            if (slot != null && slot.hasStack()
+                    && orderedItemId.equals(Registries.ITEM.getId(slot.getStack().getItem()).getPath())) {
                 return i;
             }
         }
