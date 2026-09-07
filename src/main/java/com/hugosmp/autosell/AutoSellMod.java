@@ -20,7 +20,7 @@ public class AutoSellMod implements ClientModInitializer {
     public static final String MOD_ID = "hugo_autosell";
     public static final String MOD_VERSION = "1.1.2";
 
-    // Echter Minecraft-Keybinding statt raw GLFW - löst Konflikte mit anderen Mods
+    
     private static KeyBinding toggleKey;
     private static KeyBinding commandModeKey;
     private static KeyBinding.Category keyCategory;
@@ -30,7 +30,7 @@ public class AutoSellMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Keybinding registrieren - erscheint in Minecraft's "Controls" Menü
+        
         keyCategory = KeyBinding.Category.create(Identifier.of(MOD_ID, "main"));
         toggleKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.hugo_autosell.toggle",
@@ -46,7 +46,7 @@ public class AutoSellMod implements ClientModInitializer {
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            // "Mod geladen" Nachricht beim ersten Join anzeigen
+           
             if (!loadedMessageShown && client.player != null && client.world != null) {
                 loadedMessageShown = true;
                 client.player.sendMessage(Text.literal(
@@ -56,7 +56,7 @@ public class AutoSellMod implements ClientModInitializer {
                     "§6[HugoAutoSell] §7Befehl: §e/autosell status§7 | Tutorial: §e/autosell tutorial"
                 ), false);
 
-                // Tutorial nur beim ersten Start anzeigen
+                
                 if (!tutorialQueued) {
                     tutorialQueued = true;
                     AutoSellConfig cfg = AutoSellManager.getInstance().getConfig();
@@ -73,7 +73,7 @@ public class AutoSellMod implements ClientModInitializer {
                 ));
             }
 
-            // Keybinding abfragen (Minecraft's offizieller Weg)
+           
             if (client.player != null && client.currentScreen == null) {
                 while (toggleKey.wasPressed()) {
                     AutoSellManager.getInstance().toggle();
