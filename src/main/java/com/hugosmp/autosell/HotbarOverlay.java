@@ -16,43 +16,40 @@ public class HotbarOverlay {
         int screenWidth = drawContext.getScaledWindowWidth();
         int screenHeight = drawContext.getScaledWindowHeight();
 
-        // Genug Abstand zur Minecraft-Actionbar lassen, damit Statusmeldungen sichtbar bleiben.
         int y = screenHeight - 110;
         int x = screenWidth / 2;
 
-        // Hintergrund-Box zeichnen
+      
         int boxHeight = 30;
         int boxWidth = 220;
         int boxX = x - (boxWidth / 2);
         int boxY = y - 5;
 
-        // Dunkelgrauer Hintergrund mit Semi-Transparenz
+        
         drawContext.fill(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xAA1a1a1a);
-        // Rand
-        drawContext.fill(boxX, boxY, boxX + boxWidth, boxY + 1, 0xFFFFAA00); // Orange border oben
-        drawContext.fill(boxX, boxY + boxHeight - 1, boxX + boxWidth, boxY + boxHeight, 0xFFFFAA00); // Orange border unten
+        drawContext.fill(boxX, boxY, boxX + boxWidth, boxY + 1, 0xFFFFAA00);
+        drawContext.fill(boxX, boxY + boxHeight - 1, boxX + boxWidth, boxY + boxHeight, 0xFFFFAA00); 
 
         String statusText;
         int statusColor;
 
         if (!manager.isActive()) {
-            // Mod inaktiv - Hinweis anzeigen (NEU: war vorher unsichtbar!)
             statusText = "[K] Starten | /autosell status";
-            statusColor = 0xFFAAAAAA; // Hellgrau
+            statusColor = 0xFFAAAAAA;
         } else if (manager.getState() == AutoSellManager.State.WAITING_TIMER) {
             int remainingTicks = manager.getRemainingCooldownTicks();
             int totalSeconds = remainingTicks / 20;
             int minutes = totalSeconds / 60;
             int seconds = totalSeconds % 60;
             statusText = String.format("Nächster Verkauf: %02d:%02d", minutes, seconds);
-            statusColor = 0xFFFFAA00; // Orange
+            statusColor = 0xFFFFAA00; 
         } else {
             String stepName = getStepName(manager.getState());
             statusText = ">> " + stepName;
-            statusColor = 0xFF00FF00; // Gruen
+            statusColor = 0xFF00FF00; 
         }
 
-        // Text rendern
+     
         drawContext.drawCenteredTextWithShadow(
                 MinecraftClient.getInstance().textRenderer,
                 Text.literal(statusText),
@@ -61,14 +58,14 @@ public class HotbarOverlay {
                 statusColor
         );
 
-        // Keybind-Infos unter dem Status
+        
         String keybindInfo = "[K] Toggle | [/autosell status] Info";
         drawContext.drawCenteredTextWithShadow(
                 MinecraftClient.getInstance().textRenderer,
                 Text.literal(keybindInfo),
                 x,
                 boxY + 18,
-                0xFFAAAAAA // Hellgrau
+                0xFFAAAAAA 
         );
     }
 
