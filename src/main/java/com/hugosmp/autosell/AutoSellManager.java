@@ -47,7 +47,7 @@ public class AutoSellManager {
     private BlockPos targetChestPos;
 
     {
-        // Beim Instanziieren geladene Position aus Config übernehmen
+        
         targetChestPos = config.getChestPos();
     }
 
@@ -65,7 +65,7 @@ public class AutoSellManager {
         return config;
     }
 
-    /** Switches between selling and ordering the first item taken from the chest. */
+   
     public boolean toggleCommandMode() {
         config.orderMode = !config.orderMode;
         config.save();
@@ -98,7 +98,7 @@ public class AutoSellManager {
             return;
         }
 
-        // Versuche 1: Kiste anvisiert?
+
         HitResult hit = mc.crosshairTarget;
         if (hit != null && hit.getType() == HitResult.Type.BLOCK) {
             BlockHitResult blockHit = (BlockHitResult) hit;
@@ -117,7 +117,7 @@ public class AutoSellManager {
             return;
         }
 
-        // Versuche 2: Zuvor gespeicherte Kiste vorhanden?
+        
         if (this.targetChestPos != null) {
             start();
             actionBar(mc, "§6[HugoAutoSell] §a✔ AKTIVIERT! §7(angepasste Position: §e"
@@ -126,7 +126,7 @@ public class AutoSellManager {
             return;
         }
 
-        // Weder noch: Fehler
+        
         actionBar(mc, "§6[HugoAutoSell] §cBitte schaue eine Kiste/Truhe an und drücke [K] erneut!");
         chat(mc, "§6[HugoAutoSell] §7Oder nutze §e/autosell status§7 um die aktuelle Lage zu sehen.");
     }
@@ -241,7 +241,7 @@ public class AutoSellManager {
                                     orderedItemId = Registries.ITEM.getId(slot.getStack().getItem()).getPath();
                                 }
                                 String itemId = Registries.ITEM.getId(slot.getStack().getItem()).getPath();
-                                // Eine Order akzeptiert nur einen Artikeltyp. Andere Items bleiben für den nächsten Durchlauf liegen.
+                                
                                 if (!config.orderMode || orderedItemId.equals(itemId)) {
                                     mc.interactionManager.clickSlot(handler.syncId, currentSlotIndex, 0, SlotActionType.QUICK_MOVE, mc.player);
                                     itemMoved = true;
@@ -304,8 +304,7 @@ public class AutoSellManager {
                 case WAITING_FOR_ORDER_SCREEN:
                     if (mc.currentScreen instanceof HandledScreen<?> orderScreen && stateTicks >= 8) {
                         ScreenHandler orderHandler = orderScreen.getScreenHandler();
-                        // Die Liste ist nach Preis sortiert. Wir wählen aber nur den ersten Eintrag,
-                        // dessen Artikel wirklich dem aus der Kiste gelesenen Item entspricht.
+                        
                         int orderSlot = findMatchingOrderSlot(orderHandler);
                         if (orderSlot >= 0) {
                             chat(mc, "§6[HugoAutoSell] §7Wähle beste passende Order (Slot §e" + orderSlot + "§7)...");
