@@ -20,7 +20,6 @@ public class AutoSellConfig {
     public int clickDelayTicks = 2;
     public boolean hasSeenTutorial = false;
 
-    // Persistierte Zielkisten-Position (überlebt Game-Restart)
     public boolean hasChest = false;
     public int chestX = 0;
     public int chestY = -1;
