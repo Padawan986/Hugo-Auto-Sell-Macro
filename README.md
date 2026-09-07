@@ -57,19 +57,13 @@ Client-side Fabric mod for **Minecraft 1.21.11** that automates emptying a chest
 | `/autosell tutorial` | Show the tutorial again |
 | `/autosell status` | Show status, mode, interval, chest |
 
-## 🔨 Build from source
+##  Build from source
 
 ```bash
 gradle build
 ```
 
 The finished JAR lands in `build/libs/`.
-
-### Releasing a new version (for maintainers)
-
-1. Bump `mod_version` in `gradle.properties` **and** `MOD_VERSION` in `AutoSellMod.java`
-2. Build, then create a GitHub Release with the JAR as asset
-3. Update `version.txt` in `main` to the new version — the in-game updater compares against it
 
 ##  Links
 
